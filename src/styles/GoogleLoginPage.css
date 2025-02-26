@@ -1,0 +1,22 @@
+.google-login-page {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.logo-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+.title {
+  margin-bottom: 14px;
+}

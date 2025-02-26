@@ -1,7 +1,6 @@
 import React from 'react';
 import HomeStatCard from './HomeStatCard';
 import '../../styles/Home.css';
-import { mockData, styleMockData } from '../../data/homeMockData';
 import HomeStatListCard from './HomeStatListCard';
 import { useEffect, useState } from 'react';
 import apiService from '../../services/apiService';
