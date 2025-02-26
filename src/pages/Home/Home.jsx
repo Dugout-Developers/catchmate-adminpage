@@ -22,9 +22,20 @@ const transformedTeamInfoDTO = (dto) => {
     color: teams[teamId].color || colors.gray800,
   }));
 };
-const transformedDashBoardData = (dto) => {};
+const transformedStyleDTO = (dto) => {
+  return Object.entries(dto).map(([styleName, totalCount]) => ({
+    /**
+     * @todo API upCount 수정 시 반영하기
+     */
+    name: styleName === '선택 안함' ? styleName : `${styleName} 스타일`,
+    upCount: 0,
+    totalCount: totalCount || 0,
+    color: colors.gray800,
+  }));
+};
 function Home() {
   const [teamData, setTeamData] = useState([]);
+  const [styleData, setStyleData] = useState([]);
   const [dashboardData, setDashboardData] = useState({
     userCount: {
       title: '전체 유저수',
@@ -53,6 +64,16 @@ function Home() {
         const { teamSupportCountMap } = await apiService.getHomeTeamInfo();
         const transformedData = transformedTeamInfoDTO(teamSupportCountMap);
         setTeamData(transformedData);
+      } catch (error) {
+        console.log('❌ API 호출 실패:', error);
+      }
+    };
+
+    const fetchStyleData = async () => {
+      try {
+        const { cheerStyleCountMap } = await apiService.getHomeStyleInfo();
+        const transformedStyleData = transformedStyleDTO(cheerStyleCountMap);
+        setStyleData(transformedStyleData);
       } catch (error) {
         console.log('❌ API 호출 실패:', error);
       }
@@ -89,6 +110,7 @@ function Home() {
     };
     fetchDashBoardData();
     fetchTeamData();
+    fetchStyleData();
   }, []);
   return (
     <div className="home">
@@ -96,16 +118,12 @@ function Home() {
       <section className="stat-container container">
         <HomeStatCard className="card" item={dashboardData.userCount} />
         <HomeStatCard className="card" item={dashboardData.postCount} />
-        <HomeStatCard className="card" item={mockData} />
       </section>
       <section className="team-stat-container container">
         <HomeStatListCard title="구단별 가입자 수" dataList={teamData} />
       </section>
       <section className="style-stat-container container">
-        <HomeStatListCard
-          title="응원스타일별 가입자 수"
-          dataList={styleMockData}
-        />
+        <HomeStatListCard title="응원스타일별 가입자 수" dataList={styleData} />
       </section>
       <section className="cs-stat-container container">
         <HomeStatCard
