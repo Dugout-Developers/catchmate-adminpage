@@ -2,14 +2,31 @@ import React from 'react';
 import '../../styles/HomeStatCard.css';
 import PropTypes from 'prop-types';
 import UpArrow from '../../assets/img/upArrow.svg';
+import Arrow from '../../assets/img/arrow.svg';
 import { Body02, Body01, Headline01 } from '../../styles/FontStyle/Typography';
-const HomeStatCard = ({ item }) => {
+import { useNavigate } from 'react-router-dom';
+import { colors } from '../../constants/colors';
+
+const HomeStatCard = ({ item, navigatePath }) => {
+  const navigate = useNavigate();
   const { title, totalCount, upCount } = item;
+
+  const handleClick = () => {
+    if (navigatePath) {
+      navigate(navigatePath);
+    }
+  };
+
   return (
-    <div className="stat-card">
-      <Body02 fontWeight="semiBold" as="p" className="title">
-        {title}
-      </Body02>
+    <div className="stat-card" onClick={navigatePath ? handleClick : undefined}>
+      <div className="stat-header">
+        <Body02 fontWeight="semiBold" as="p" className="title">
+          {title}
+        </Body02>
+        {navigatePath && (
+          <img src={Arrow} alt="네비게이터" className="nav-icon" />
+        )}
+      </div>
       <div className="stat-count">
         <div className="up-count">
           <span>
@@ -43,6 +60,7 @@ HomeStatCard.propTypes = {
     totalCount: PropTypes.number, // 전체 수는 숫자
     upCount: PropTypes.number, // 증가 수는 숫자
   }),
+  navigatePath: PropTypes.string,
 };
 
 export default HomeStatCard;
