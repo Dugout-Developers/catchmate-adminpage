@@ -5,7 +5,6 @@ import UpArrow from '../../assets/img/upArrow.svg';
 import Arrow from '../../assets/img/arrow.svg';
 import { Body02, Body01, Headline01 } from '../../styles/FontStyle/Typography';
 import { useNavigate } from 'react-router-dom';
-import { colors } from '../../constants/colors';
 
 const HomeStatCard = ({ item, navigatePath }) => {
   const navigate = useNavigate();
