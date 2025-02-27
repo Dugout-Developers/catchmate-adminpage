@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Home from './pages/Home/Home.jsx';
-import Users from './pages/Users.jsx';
+import Users from './pages/User/Users.jsx';
 import Posts from './pages/Posts.jsx';
 import Reports from './pages/Reports.jsx';
 import Inquiries from './pages/Inquiries.jsx';
