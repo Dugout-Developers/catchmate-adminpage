@@ -1,0 +1,29 @@
+.user-container {
+  height: 100vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.user-nav {
+  margin-right: 16px;
+  min-width: 280px;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.list-title {
+  background-color: white;
+  padding: 24px;
+  border-radius: 16px;
+  color: var(--gray600);
+  margin-bottom: 8px;
+}
+
+.select-team-count {
+  color: var(--primary);
+}

@@ -15,6 +15,7 @@ const colors = {
   // brandColor
   primary: '#FD5E5E',
   brand500: '#FD5E5E',
+  brand50: '#FFDFDF',
 
   // teamColor
   hanhwa: '#ED702D',
