@@ -49,7 +49,15 @@ export const apiService = {
   getHomeGenderInfo: () => apiClient.get('/admin/user/gender-ratio'),
   getHomeTeamInfo: () => apiClient.get('/admin/user/team-support'),
   getHomeStyleInfo: () => apiClient.get('/admin/user/cheer-style'),
-
+  getUserListData: (clubName, page) => {
+    const params = {
+      page: page - 1,
+    };
+    if (clubName) {
+      params.clubName = clubName; // clubName이 있을 때만 추가
+    }
+    return apiClient.get('/admin/user', { params });
+  },
   // DELETE 요청
   deleteTokenLogout: () => apiClient.delete('/auth/logout'),
 };

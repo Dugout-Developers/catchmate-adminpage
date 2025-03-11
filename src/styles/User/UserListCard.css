@@ -1,0 +1,157 @@
+.user-table-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari에서 스크롤바 숨기기 */
+}
+.user-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 600px; /* 테이블이 너무 길어지면 스크롤 */
+  overflow-y: auto; /* ✅ 테이블 내용만 스크롤 */
+  position: relative; /* ✅ 페이지네이션 고정을 위해 부모 요소 설정 */
+}
+
+/* ✅ 테이블이 너무 커져도 스크롤 가능하도록 설정 */
+.table-container {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* ✅ 페이지네이션 고정 */
+.pagination-wrapper {
+  position: sticky;
+  bottom: 0;
+  background-color: white; /* ✅ 배경색 추가 (투명하면 겹쳐 보일 수 있음) */
+  padding: 12px 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* ✅ 위쪽에 경계 효과 */
+  z-index: 10;
+}
+/* ✅ 테이블 기본 스타일 */
+.user-list-container {
+  background-color: white;
+  border-radius: 16px;
+  color: var(--gray600);
+  width: 100%;
+  text-align: start;
+  border-collapse: collapse;
+  table-layout: fixed; /* 너비를 균등하게 맞추기 */
+}
+
+/* ✅ 테이블 헤더를 고정 */
+.user-list-container thead {
+  position: sticky;
+  top: 0;
+  background-color: white; /* 배경색 지정 (스크롤 시 글자가 안 보이는 것 방지) */
+  z-index: 10; /* 다른 요소 위에 유지 */
+}
+
+/* ✅ 테이블 헤더 스타일 */
+.header-item {
+  padding: 12px 16px;
+  text-align: start;
+  font-weight: bold;
+  border-bottom: 1px solid var(--gray100);
+}
+
+/* ✅ 개별 컬럼 너비 설정 (비율 조정) */
+.profile-col {
+  width: 8%;
+} /* 프로필 이미지 */
+.nickname-col {
+  width: 15%;
+} /* 닉네임 */
+.team-col {
+  width: 15%;
+} /* 응원구단 */
+.gender-col {
+  width: 10%;
+} /* 성별 */
+.email-col {
+  width: 30%;
+} /* 이메일(넉넉히) */
+.join-col {
+  width: 15%;
+} /* 가입일자 */
+
+/* ✅ 테이블 셀 스타일 */
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray100);
+}
+
+/* ✅ 프로필 이미지 둥글게 */
+.userImage-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* ✅ 이메일 아이콘 & 텍스트 가로 정렬 */
+.email-item-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ✅ 이메일 텍스트가 넘치면 ... 표시 */
+.email-text {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✅ 이메일 아이콘 크기 고정 */
+.login-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ✅ 반응형 지원 (작은 화면에서는 컬럼 너비 조정) */
+@media (max-width: 1024px) {
+  .profile-col {
+    width: 10%;
+  }
+  .nickname-col {
+    width: 20%;
+  }
+  .team-col {
+    width: 20%;
+  }
+  .gender-col {
+    width: 10%;
+  }
+  .email-col {
+    width: 40%;
+  }
+  .join-col {
+    width: 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-list-container {
+    font-size: 14px; /* 작은 화면에서 글씨 크기 줄이기 */
+  }
+
+  .profile-col {
+    width: 12%;
+  }
+  .nickname-col {
+    width: 25%;
+  }
+  .team-col {
+    width: 25%;
+  }
+  .gender-col {
+    width: 12%;
+  }
+  .email-col {
+    width: 50%;
+  }
+  .join-col {
+    width: 25%;
+  }
+}
