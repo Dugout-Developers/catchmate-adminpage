@@ -7,6 +7,7 @@
 
 .user-nav {
   margin-right: 16px;
+  min-width: 280px;
 }
 
 .user-list {

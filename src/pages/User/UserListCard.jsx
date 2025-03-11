@@ -6,7 +6,7 @@ import DefaultUserImage from '../../assets/img/defaultImg.svg';
 import { formatDate } from '../../services/dateFormmat.js';
 import Pagination from '../../components/Pagination';
 import NavIcon from '../../assets/img/arrow.svg';
-const UserListCard = ({ userData, pageData, onPageChange }) => {
+const UserListCard = ({ userData, pageData, onPageChange, onUserSelect }) => {
   const { currentPage, totalPages, isFirst, isLast } = pageData;
 
   return (
@@ -40,7 +40,11 @@ const UserListCard = ({ userData, pageData, onPageChange }) => {
           </thead>
           <tbody>
             {userData.map((user) => (
-              <tr key={user.userId} className="user-item">
+              <tr
+                key={user.userId}
+                className="user-item"
+                onClick={() => onUserSelect(user)}
+              >
                 <td className="userImage-item">
                   <img
                     src={user.profileImageUrl || DefaultUserImage}

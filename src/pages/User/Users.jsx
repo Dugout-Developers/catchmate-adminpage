@@ -5,6 +5,7 @@ import apiService from '../../services/apiService';
 import '../../styles/User/User.css';
 import { Body02 } from '../../styles/FontStyle/Typography';
 import UserListCard from './UserListCard';
+import UserDetail from './UserDetail';
 
 const transformedTeamData = (dto) => {
   var sum = 0;
@@ -35,6 +36,7 @@ function Users() {
     isLast: true,
   });
   const [selectedClub, setSelectedClub] = useState('전체');
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -70,7 +72,14 @@ function Users() {
 
     fetchUserList();
   }, [pageData.currentPage, selectedClub]); // ✅ 페이지 또는 필터 변경 시 API 요청
-
+  // ✅ 유저 선택 핸들러 (클릭한 유저 디테일 보이기)
+  const handleUserSelect = (user) => {
+    if (user.userId === selectedUser?.userId) {
+      setSelectedUser(null);
+    } else {
+      setSelectedUser(user);
+    }
+  };
   // ✅ 팀 선택 핸들러 (클릭한 팀으로 필터링)
   const handleTeamSelect = (teamName) => {
     setSelectedClub(teamName);
@@ -91,13 +100,17 @@ function Users() {
 
   return (
     <div className="user-container">
-      <section className="user-nav">
-        <TeamUserStatCard
-          teamDatas={teamStatData}
-          selectedTeam={selectedClub}
-          onTeamSelect={handleTeamSelect}
-        />
-      </section>
+      {selectedUser ? (
+        <UserDetail user={selectedUser} />
+      ) : (
+        <section className="user-nav">
+          <TeamUserStatCard
+            teamDatas={teamStatData}
+            selectedTeam={selectedClub}
+            onTeamSelect={handleTeamSelect}
+          />
+        </section>
+      )}
       <section className="user-list">
         <div className="list-title">
           <Body02 fontWeight="semiBold" as="span" className="select-team">
@@ -115,6 +128,7 @@ function Users() {
           userData={userListData}
           pageData={pageData}
           onPageChange={handlePageChange}
+          onUserSelect={handleUserSelect}
         />
       </section>
     </div>
