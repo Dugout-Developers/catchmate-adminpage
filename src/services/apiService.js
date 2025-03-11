@@ -53,8 +53,8 @@ export const apiService = {
     const params = {
       page: page - 1,
     };
-    if (clubName) {
-      params.clubName = clubName; // clubName이 있을 때만 추가
+    if (clubName !== '전체') {
+      params.clubName = clubName;
     }
     return apiClient.get('/admin/user', { params });
   },

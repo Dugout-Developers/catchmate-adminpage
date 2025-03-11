@@ -17,6 +17,12 @@
   width: 100%;
   border-bottom: 1px solid var(--gray200);
 }
+
+li.selected {
+  background-color: var(--gray50);
+  border-radius: 8px;
+}
+
 .stat-item:last-child {
   border-bottom: none;
 }

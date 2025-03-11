@@ -34,7 +34,7 @@ function Users() {
     isFirst: true,
     isLast: true,
   });
-  const [selectedClub, setSelectedClub] = useState(null); // ✅ 필터(구단) 선택 값 추가
+  const [selectedClub, setSelectedClub] = useState('전체');
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -71,6 +71,15 @@ function Users() {
     fetchUserList();
   }, [pageData.currentPage, selectedClub]); // ✅ 페이지 또는 필터 변경 시 API 요청
 
+  // ✅ 팀 선택 핸들러 (클릭한 팀으로 필터링)
+  const handleTeamSelect = (teamName) => {
+    setSelectedClub(teamName);
+    setPageData((prev) => ({
+      ...prev,
+      currentPage: 1, // ✅ 팀을 변경하면 페이지를 1로 초기화
+    }));
+  };
+
   // ✅ 페이지 변경 핸들러
   const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > pageData.totalPages) return;
@@ -83,15 +92,20 @@ function Users() {
   return (
     <div className="user-container">
       <section className="user-nav">
-        <TeamUserStatCard teamDatas={teamStatData} />
+        <TeamUserStatCard
+          teamDatas={teamStatData}
+          selectedTeam={selectedClub}
+          onTeamSelect={handleTeamSelect}
+        />
       </section>
       <section className="user-list">
         <div className="list-title">
           <Body02 fontWeight="semiBold" as="span" className="select-team">
-            {'전체 유저 '}
+            {`${selectedClub} 유저 `}
           </Body02>
           <Body02 fontWeight="semiBold" as="span" className="select-team-count">
-            9,999
+            {teamStatData?.find((team) => team.name === selectedClub)
+              ?.totalCount || 0}
           </Body02>
           <Body02 fontWeight="semiBold" as="span">
             명
